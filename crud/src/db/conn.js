@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/USERSSDB", {
+mongoose.connect("mongodb://localhost:27017/USERSSSDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true

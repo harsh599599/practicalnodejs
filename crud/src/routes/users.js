@@ -17,6 +17,16 @@ router.get('/display', function(req, res) {
     });
 });
 
+//Search 
+
+
+router.get('/search/:name', function(req, res) {
+
+    var regex = new RegExp(req.params.name);
+    UsersModel.find({ name: regex }).then((users) => {
+        res.status(200).json(users)
+    })
+})
 
 //Display Form 
 router.get('/add', function(req, res, next) {
@@ -29,9 +39,9 @@ router.post('/add', function(req, res, next) {
     console.log(req.body);
 
     const mybodydata = {
-        user_name: req.body.user_name,
-        full_name: req.body.full_name,
-        user_email: req.body.user_email,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        birth_date: req.body.birth_date,
         user_mobile: req.body.user_mobile
     }
     var data = UsersModel(mybodydata);
@@ -81,10 +91,8 @@ router.get('/edit/:id', function(req, res) {
 router.post('/edit/:id', function(req, res) {
     UsersModel.findByIdAndUpdate(req.params.id, req.body, function(err) {
         if (err) {
-
             res.redirect('edit/' + req.params.id);
         } else {
-
             res.redirect('../display');
         }
     });
